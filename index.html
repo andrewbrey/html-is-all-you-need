@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en" class="antialiased">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,15 +7,65 @@
 		<link href="https://unpkg.com/tailwindcss@1.4.6/dist/tailwind.min.css" rel="stylesheet" />
 		<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.4.1/dist/alpine.min.js" defer></script>
 	</head>
-	<body class="">
-		<main class="">
-			<h1 class="">To Do List 📝</h1>
-			<form class="">
-				<input class="" placeholder="Add a todo..." />
-				<button class="" type="submit">Add</button>
+	<body
+		class="p-4 flex flex-col justify-center items-center"
+		x-data="{ todos: [{text: 'Lightning talk demo', done: false}], next: null }"
+	>
+		<main class="w-full max-w-lg mt-10 md:mt-20 space-y-4">
+			<h1 class="font-bold text-4xl text-center text-blue-700">To Do List 📝</h1>
+			<form
+				class="flex justify-between items-center"
+				@submit.prevent="next && todos.push({text: next, done: false});next = null;"
+			>
+				<input
+					class="flex-grow py-2 px-4 rounded border border-blue-500 placeholder-blue-600 focus:outline-none focus:shadow-outline"
+					placeholder="Add a todo..."
+					x-model="next"
+				/>
+				<button
+					class="p-2 flex transition-colors duration-150 text-blue-500 hover:text-blue-700 focus:text-blue-700 focus:outline-none"
+					type="submit"
+				>
+					<span class="w-10 h-10">
+						<svg fill="currentColor" viewBox="0 0 20 20">
+							<path
+								fill-rule="evenodd"
+								d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+								clip-rule="evenodd"
+							></path>
+						</svg>
+					</span>
+				</button>
 			</form>
 			<hr />
-			<section class=""></section>
+			<section class="">
+				<ul class="">
+					<template x-for="(todo, idx) in todos" :key="todo">
+						<li class="p-2 flex items-center justify-between rounded" :class="{ 'bg-gray-100': idx % 2 === 0 }">
+							<span class="space-x-2">
+								<input type="checkbox" x-model="todo.done" />
+								<span
+									class="transition-colors duration-150"
+									x-text="todo.text"
+									:class="{'line-through text-gray-500': todo.done}"
+								></span>
+							</span>
+							<button
+								class="p-2 text-gray-500 transition-colors duration-150 hover:text-red-500 focus:text-red-500 focus:outline-none"
+								@click.prevent.once="todos.splice(idx,1)"
+							>
+								<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+									<path
+										fill-rule="evenodd"
+										d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+										clip-rule="evenodd"
+									></path>
+								</svg>
+							</button>
+						</li>
+					</template>
+				</ul>
+			</section>
 		</main>
 	</body>
 </html>
