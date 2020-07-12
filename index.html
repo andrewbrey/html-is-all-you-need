@@ -39,7 +39,7 @@
 			</form>
 			<hr />
 			<section class="">
-				<ul class="">
+				<ul class="h-64 overflow-auto">
 					<template x-for="(todo, idx) in todos" :key="todo">
 						<li class="p-2 flex items-center justify-between rounded" :class="{ 'bg-gray-100': idx % 2 === 0 }">
 							<span class="space-x-2">
