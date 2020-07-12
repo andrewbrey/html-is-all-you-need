@@ -1,0 +1,15 @@
+{
+  "name": "html-is-all-you-need",
+  "version": "1.0.0",
+  "repository": "git@github.com:andrewbrey/html-is-all-you-need.git",
+  "author": "Andrew Brey <34140052+andrewbrey@users.noreply.github.com>",
+  "license": "MIT",
+  "private": "false",
+  "scripts": {
+    "start": "live-server --port=8000 --host=localhost --no-browser --watch=index.html"
+  },
+  "devDependencies": {
+    "live-server": "1.2.1",
+    "tailwindcss": "1.4.6"
+  }
+}
